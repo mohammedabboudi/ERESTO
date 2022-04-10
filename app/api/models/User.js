@@ -10,12 +10,14 @@ const userSchema = new Schema({
         type : String,
         required : true,
         unique : true,
+        trim : true,
         minlength :10
     },
     password : {
 
         type : String,
         required : true,
+        trim : true,
         minlength :14
 
     },
@@ -24,6 +26,7 @@ const userSchema = new Schema({
         type : String,
         default : 'client',
         required : true,
+        trim : true,
         maxlength : 14
 
     },
@@ -32,6 +35,7 @@ const userSchema = new Schema({
         type : Number,
         required : true,
         unique : true,
+        trim : true,
         minlength :10
         
     },
@@ -39,6 +43,7 @@ const userSchema = new Schema({
 
         type : String,
         required : true,
+        trim : true,
         minlength :10
         
     },
@@ -49,9 +54,9 @@ const userSchema = new Schema({
         required : true
         
     }
-    
+
 
 });
 
 
-module.exports = userSchema;
+module.exports = mongoose.model('user', userSchema );
