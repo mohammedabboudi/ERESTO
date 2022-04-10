@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const database = require('./app/config/database/Mongoose_connection')
 const userRouter = require('./app/api/routes/User')
+var bodyParser = require('body-parser');
 
 const port = process.env.PORT || 3000;
 
