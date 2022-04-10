@@ -9,8 +9,25 @@ function userList(req, res){
 }
 
 
+function userRegister(req, res){
+
+    const userCredenials = {
+
+        email : req.body.email,
+        password : req.body.password,
+        role: req.body.role,
+        phoneNumber : req.body.phoneNumber,
+        address : req.body.address
+    }
+
+    res.send(userCredenials);
+
+}
+
+
 module.exports = {
 
-    userList
+    userList,
+    userRegister
 
 }
