@@ -11,16 +11,34 @@ function userList(req, res){
 
 function userRegister(req, res){
 
-    const userCredenials = {
 
-        email : req.body.email,
-        password : req.body.password,
-        role: req.body.role,
-        phoneNumber : req.body.phoneNumber,
-        address : req.body.address
-    }
+    const newUser = new User();
 
-    res.send(userCredenials);
+    newUser.email = req.body.email;
+    newUser.password = req.body.password;
+    newUser.role = req.body.role;
+    newUser.phoneNumber = req.body.phoneNumber;
+    newUser.address = req.body.address;
+
+    newUser.save().then(savedUser =>{
+
+        res.send(savedUser);
+
+    }).catch(err =>{
+
+        if (err.keyPattern.email) {
+            
+            res.send(`Please try another email, this one ${err.keyValue.email} is already exist`);
+
+        }
+        else if(err.keyPattern.phoneNumber){
+
+            res.send(`Please try another phone number, this one : ${err.keyValue.phoneNumber} is already exist`);
+
+        }    
+
+    })
+
 
 }
 
