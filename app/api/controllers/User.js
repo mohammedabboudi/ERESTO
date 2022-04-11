@@ -91,5 +91,6 @@ module.exports = {
     userList,
     userRegister,
     userEdit,
+    userDelete
 
 }
