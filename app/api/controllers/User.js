@@ -39,13 +39,47 @@ function userRegister(req, res){
 
     })
 
+}
+
+
+function userEdit(req, res){
+
+
+    const id = req.body.id;
+    const email = req.body.email;
+    const password = req.body.password;
+    const role = req.body.role;
+    const phoneNumber = req.body.phoneNumber;
+    const address = req.body.address;
+
+    User.findOneAndUpdate({_id : id}, {$set: {email: email, password: password, role: role, phoneNumber: phoneNumber, address: address}}).then(updatedUser =>{
+
+        res.send(updatedUser);
+
+    }).catch(err =>{
+
+        if (err.keyPattern.email) {
+            
+            res.send(`Please try another email, this one ${err.keyValue.email} is already exist`);
+
+        }
+        else if(err.keyPattern.phoneNumber){
+
+            res.send(`Please try another phone number, this one : ${err.keyValue.phoneNumber} is already exist`);
+
+        }    
+
+    })
 
 }
+
+
 
 
 module.exports = {
 
     userList,
-    userRegister
+    userRegister,
+    userEdit,
 
 }

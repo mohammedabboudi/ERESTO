@@ -11,5 +11,8 @@ router.get('/', userController.userList);
 
 router.post('/register',userMiddleware.validator, userMiddleware.userValidator, userController.userRegister);
 
+router.patch('/edit',userMiddleware.validator, userMiddleware.userValidator, userController.userEdit);
+
+
 
 module.exports = router;
