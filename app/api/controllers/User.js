@@ -74,6 +74,16 @@ function userEdit(req, res){
 }
 
 
+function userDelete(req, res){
+    
+    User.findOneAndDelete({ _id: req.body.id}).then(deletedUser =>{
+        res.send(deletedUser);
+        console.log(`THE USER DELETED SUCCESSFULY...`)
+    }).catch(err =>{
+        res.send(err);
+    });
+}
+
 
 
 module.exports = {

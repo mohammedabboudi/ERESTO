@@ -13,6 +13,8 @@ router.post('/register',userMiddleware.validator, userMiddleware.userValidator, 
 
 router.patch('/edit',userMiddleware.validator, userMiddleware.userValidator, userController.userEdit);
 
+router.delete('/delete', userController.userDelete);
+
 
 
 module.exports = router;
