@@ -1,4 +1,3 @@
-const database = require('../../config/database/Mongoose_connection');
 const User = require('../models/User');
 
 

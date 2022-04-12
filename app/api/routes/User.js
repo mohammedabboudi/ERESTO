@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/User');
-const userMiddleware = require('../middleware/User');
+const registerValidation = require('../validations/user/Register-validation');
 
 
 
@@ -9,9 +9,9 @@ const userMiddleware = require('../middleware/User');
 
 router.get('/', userController.userList);
 
-router.post('/register',userMiddleware.validator, userMiddleware.userValidator, userController.userRegister);
+router.post('/register',registerValidation.validator, registerValidation.registerValidator, userController.userRegister);
 
-router.patch('/edit',userMiddleware.validator, userMiddleware.userValidator, userController.userEdit);
+router.patch('/edit',registerValidation.validator, registerValidation.registerValidator, userController.userEdit);
 
 router.delete('/delete', userController.userDelete);
 
