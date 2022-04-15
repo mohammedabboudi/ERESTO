@@ -25,58 +25,43 @@ function authorization(req, res, next){
     const access_token = req.cookies.access_token || '';
     const refresh_token = req.cookies.refresh_token || '';
 
-    
+    if (!refresh_token && !access_token) res.send(`you're logged out`);
+
       try {
-
-
         if (access_token) {
-              
                 const decrypted_access_token = verifyAccessToken(access_token, ACCESS_SECRET);
-
                 req.user = {
                     id: decrypted_access_token.id,
                     role: decrypted_access_token.role,
                 };
-
-                next();
-              
+                next();  
         }
-       
-
-
       } catch (err) {
-        
-        if(refresh_token){
-
-            const decrypted_refresh_token = verifyRefreshToken(refresh_token, REFRESH_SECRET);
-
-            const id = decrypted_refresh_token.id;
-            const role = decrypted_refresh_token.role;
-        
-            const user = { id, role }
-
-            console.log(user)
-
-            const accessTokenExpiresIn = '15s';
-
-            const access_token = generateAccessToken(user,ACCESS_SECRET, accessTokenExpiresIn);
-
-
-            res.cookie("access_token", access_token, {
-                secure: false,
-                httpOnly: true,
-            });
-
-            console.log(access_token)
-
-            next();
-
+        // res.send(`you sould get a new access token`);
+        try {
+            if(refresh_token){
+                const decrypted_refresh_token = verifyRefreshToken(refresh_token, REFRESH_SECRET);
+                const id = decrypted_refresh_token.id;
+                const role = decrypted_refresh_token.role;
+                const user = { id, role }
+                // console.log(user)
+                const accessTokenExpiresIn = '15s';
+                const access_token = generateAccessToken(user,ACCESS_SECRET, accessTokenExpiresIn);
+                res.cookie("access_token", access_token, {
+                    secure: false,
+                    httpOnly: true,
+                });
+                // console.log(access_token)
+                next();
+            }
+        } catch (err) {
+            res.send(`the refresh toke is expired you should login`);  
         }
-
-
       }
   
-  
+
+
+
   }
 
 
