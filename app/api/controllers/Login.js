@@ -10,7 +10,7 @@ function login(req, res, next){
 
     User.findOne(userCredentials).then(user =>{
 
-        req.userExist = user;
+        req.user = user;
         next();
 
     }).catch(err =>{
