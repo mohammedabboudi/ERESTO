@@ -4,6 +4,7 @@ const database = require('./app/config/database/Mongoose_connection')
 const bodyParser = require('body-parser');
 const userRouter = require('./app/api/routes/User');
 const loginRouter = require('./app/api/routes/Login');
+const cookieParser = require('cookie-parser')
 
 const port = process.env.PORT || 3000;
 
@@ -11,6 +12,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
+
+app.use(cookieParser());
 
 app.use('/user', userRouter);
 

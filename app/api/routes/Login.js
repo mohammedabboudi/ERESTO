@@ -1,22 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const loginController = require('../controllers/Login');
-const loginValidation = require('../validations/user/Login-validation');
-const jwtMiddleware = require('../middleware/user/jwt');
-const verifyTokenMiddleware = require('../middleware/user/verifyToken');
+const { login } = require('../controllers/Login');
+const { validator, loginValidator } = require('../validations/user/Login-validation');
+const { signTokens } = require('../middleware/user/signJWTs');
+const { authorization } = require('../middleware/user/authorizeJWTs');
+
+const jwt = require('jsonwebtoken');
 
 
+let refreshTokens = [];
 
 
+router.post('/login', validator, loginValidator, login, signTokens);
 
-router.post('/login',loginValidation.validator, loginValidation.loginValidator, loginController.login, jwtMiddleware.jwtgenerator);
+router.get('/test', authorization,(req, res)=>{
 
-router.get('/test', verifyTokenMiddleware.verifyToken, (req, res)=>{
-
-    console.log(`the user has been verified ...`)
-    res.send(`the user has been verified ...`)
+    res.send(`hello from the server side ...`); 
 });
 
+
+router.post('/token', (req, res)=>{
+
+})
 
 
 module.exports = router;
