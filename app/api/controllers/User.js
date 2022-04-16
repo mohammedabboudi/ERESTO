@@ -16,7 +16,7 @@ function userSelect(req, res){
 }
 
 
-function userRegister(req, res){
+function userRegister(req, res, next){
 
 
     const newUser = new User();
@@ -29,7 +29,8 @@ function userRegister(req, res){
 
     newUser.save().then(savedUser =>{
 
-        res.send(savedUser);
+         req.user = savedUser;
+         next();
 
     }).catch(err =>{
 
