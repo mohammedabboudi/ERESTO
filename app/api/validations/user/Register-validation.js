@@ -10,7 +10,7 @@ const validator = [
  ]
 
 
-function registerValidator(req, res, next){
+function registerValidation(req, res, next){
 
     const errors = validationResult(req);
 
@@ -27,6 +27,6 @@ function registerValidator(req, res, next){
 module.exports = { 
 
     validator,
-    registerValidator
+    registerValidation
     
 }
