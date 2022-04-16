@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/User');
+const { userSelect, userRegister, userEdit, userDelete } = require('../controllers/User');
+const { authorization } = require('../middleware/user/authorizeJWTs');
 const registerValidation = require('../validations/user/Register-validation');
-const verifyTokenMiddleware = require('../../utilities/verifyAccessToken');
 
 
 
 
-router.get('/', verifyTokenMiddleware.verifyAccessToken, userController.userList);
+router.get('/', authorization, userSelect);
 
-router.post('/register',registerValidation.validator, registerValidation.registerValidator, userController.userRegister);
+router.post('/register',registerValidation.validator, registerValidation.registerValidator, userRegister);
 
-router.patch('/edit', verifyTokenMiddleware.verifyAccessToken, registerValidation.validator, registerValidation.registerValidator, userController.userEdit);
+router.patch('/edit', authorization, registerValidation.validator, registerValidation.registerValidator, userEdit);
 
-router.delete('/delete', verifyTokenMiddleware.verifyAccessToken, userController.userDelete);
+router.delete('/delete', authorization, userDelete);
 
 
 

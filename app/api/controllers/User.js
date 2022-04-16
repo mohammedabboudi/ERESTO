@@ -1,9 +1,17 @@
 const User = require('../models/User');
 
 
-function userList(req, res){
+function userSelect(req, res){
 
-    res.send(`hello from the normal user route ...`);
+    User.find({}).then(users =>{
+
+        res.send(users);
+
+    }).catch(err =>{
+
+        res.send(err);
+
+    });
 
 }
 
@@ -87,7 +95,7 @@ function userDelete(req, res){
 
 module.exports = {
 
-    userList,
+    userSelect,
     userRegister,
     userEdit,
     userDelete
