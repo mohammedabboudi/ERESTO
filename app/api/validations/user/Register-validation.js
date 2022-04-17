@@ -2,7 +2,7 @@
 const { body , validationResult } = require('express-validator');
 
 
-const validator = [
+const saveValidator = [
     body('email').isEmail().withMessage('email must be an email format'),
     body('password').isLength({ min : 10 }).withMessage('password must be at least 10 chars long'),
     body('phoneNumber').isLength({ min : 10 }).withMessage('phone number must be at least 10 chars long'),
@@ -10,7 +10,7 @@ const validator = [
  ]
 
 
-function registerValidation(req, res, next){
+function saveValidation(req, res, next){
 
     const errors = validationResult(req);
 
@@ -26,7 +26,7 @@ function registerValidation(req, res, next){
 
 module.exports = { 
 
-    validator,
-    registerValidation
+    saveValidator,
+    saveValidation
     
 }

@@ -1,6 +1,6 @@
-const { generateAccessToken } = require("../../../utilities/generateJWTs");
-const { verifyAccessToken } = require("../../../utilities/verifyAccessToken");
-const { verifyRefreshToken } = require("../../../utilities/verifyRefreshToken");
+const { generateAccessToken } = require("../../assets/generateJWTs");
+const { verifyAccessToken } = require("../../assets/verifyAccessToken");
+const { verifyRefreshToken } = require("../../assets/verifyRefreshToken");
 
 const ACCESS_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_TOKEN_SECRET;
@@ -30,10 +30,8 @@ function authorization(req, res, next){
       try {
         if (access_token) {
                 const decrypted_access_token = verifyAccessToken(access_token, ACCESS_SECRET);
-                req.user = {
-                    id: decrypted_access_token.id,
-                    role: decrypted_access_token.role,
-                };
+                const user = { id: decrypted_access_token.id, role: decrypted_access_token.role };
+                req.user = user;
                 next();  
         }
       } catch (err) {
@@ -41,9 +39,8 @@ function authorization(req, res, next){
         try {
             if(refresh_token){
                 const decrypted_refresh_token = verifyRefreshToken(refresh_token, REFRESH_SECRET);
-                const id = decrypted_refresh_token.id;
-                const role = decrypted_refresh_token.role;
-                const user = { id, role }
+                const user = { id: decrypted_refresh_token.id, role: decrypted_refresh_token.role };
+                req.user = user;
                 // console.log(user)
                 const accessTokenExpiresIn = '15s';
                 const access_token = generateAccessToken(user,ACCESS_SECRET, accessTokenExpiresIn);

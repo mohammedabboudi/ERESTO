@@ -2,13 +2,13 @@
 const { body , validationResult } = require('express-validator');
 
 
-const validator = [
+const loginValidator = [
     body('email').isEmail().withMessage('email must be an email format'),
     body('password').isLength({ min : 10 }).withMessage('password must be at least 10 chars long')
  ]
 
 
-function loginValidator(req, res, next){
+function loginValidation(req, res, next){
 
     const errors = validationResult(req);
 
@@ -24,7 +24,7 @@ function loginValidator(req, res, next){
 
 module.exports = { 
 
-    validator,
-    loginValidator
+    loginValidator,
+    loginValidation
     
 }
