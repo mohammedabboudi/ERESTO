@@ -1,6 +1,6 @@
-const { generateAccessToken } = require("../../../utilities/generateJWTs");
-const { verifyAccessToken } = require("../../../utilities/verifyAccessToken");
-const { verifyRefreshToken } = require("../../../utilities/verifyRefreshToken");
+const { generateAccessToken } = require("../../assets/generateJWTs");
+const { verifyAccessToken } = require("../../assets/verifyAccessToken");
+const { verifyRefreshToken } = require("../../assets/verifyRefreshToken");
 
 const ACCESS_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_TOKEN_SECRET;

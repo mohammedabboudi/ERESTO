@@ -1,4 +1,4 @@
-const { generateAccessToken, generateRefreshToken } = require('../../../utilities/generateJWTs');
+const { generateAccessToken, generateRefreshToken } = require('../../assets/generateJWTs');
 
 
 const ACCESS_SECRET = process.env.ACCESS_TOKEN_SECRET;
