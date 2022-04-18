@@ -54,6 +54,13 @@ const userSchema = new Schema({
         default : true,
         required : true
         
+    },
+    sector : {
+
+        type : String,
+        default : null,
+        minlength :10
+        
     }
 
 
