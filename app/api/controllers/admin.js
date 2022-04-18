@@ -56,10 +56,27 @@ function addUser(req, res){
 }
 
 
+function changeStatus(req, res){
+
+    const id = req.body.id;
+    const blocked = req.body.blocked;
+
+    User.findByIdAndUpdate({_id: id}, {$set: {blocked : blocked}}).then(user =>{
+
+        res.send(user);
+    }).catch(err =>{
+
+        res.send(err);
+    })
+
+}
+
+
 
 module.exports = {
 
     addSector,
-    addUser
+    addUser,
+    changeStatus
 
 }

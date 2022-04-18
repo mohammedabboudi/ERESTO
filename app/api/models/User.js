@@ -60,6 +60,13 @@ const userSchema = new Schema({
         type : String,
         default : null,
         
+    },
+    blocked : {
+
+        type : Boolean,
+        default : false,
+        required : true
+        
     }
 
 
