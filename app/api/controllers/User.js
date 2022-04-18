@@ -22,6 +22,7 @@ function userRegister(req, res, next){
 
     newUser.email = req.body.email;
     newUser.password = req.body.password;
+    // newUser.role = req.body.role; // should not be here
     newUser.phoneNumber = req.body.phoneNumber;
     newUser.address = req.body.address;
 
