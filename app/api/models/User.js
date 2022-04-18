@@ -59,7 +59,6 @@ const userSchema = new Schema({
 
         type : String,
         default : null,
-        minlength :10
         
     }
 
