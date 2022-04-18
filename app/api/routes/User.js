@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { userSelect, userRegister, userEdit, userDelete } = require('../controllers/User');
+const { userSelect, userRegister, userEdit, userDelete } = require('../controllers/user');
 const { logout } = require("../controllers/logout");
 const { authorization } = require('../middleware/authorizeJWTs');
 const { saveValidator, saveValidation } = require('../validations/user/register-validation');
 const { loginValidator, loginValidation } = require('../validations/user/login-validation');
 const { signTokens } = require('../middleware/SignJWTs');
-const { login } = require('../controllers/Login');
+const { login } = require('../controllers/login');
 
 
 
