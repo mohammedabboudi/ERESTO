@@ -12,7 +12,7 @@ const { login } = require('../controllers/login');
 
 
 
-router.get('/', authorization, userSelect);
+router.get('/', authorization);
 
 router.post('/register', saveValidator, saveValidation, userRegister, signTokens);
 

@@ -1,11 +1,27 @@
 const User = require('../models/User');
 
 
-function userSelect(req, res){
+function usersSelect(req, res){
 
     User.find({}).then(users =>{
 
         res.send(users);
+
+    }).catch(err =>{
+
+        res.send(err);
+
+    });
+
+}
+
+function userSelect(req, res){
+
+    const id = req.body.id
+
+    User.find({_id: id}).then(user =>{
+
+        res.send(user);
 
     }).catch(err =>{
 
@@ -95,6 +111,7 @@ function userDelete(req, res){
 
 module.exports = {
 
+    usersSelect,
     userSelect,
     userRegister,
     userEdit,
