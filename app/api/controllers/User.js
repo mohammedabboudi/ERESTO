@@ -18,15 +18,12 @@ function userSelect(req, res){
 
 function userRegister(req, res, next){
 
-
     const newUser = new User();
 
     newUser.email = req.body.email;
     newUser.password = req.body.password;
-    newUser.role = req.body.role || '';
     newUser.phoneNumber = req.body.phoneNumber;
     newUser.address = req.body.address;
-    
 
     newUser.save().then(savedUser =>{
 
