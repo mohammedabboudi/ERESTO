@@ -1,5 +1,5 @@
 const express = require('express');
-const { addSector, addUser } = require('../controllers/admin');
+const { addSector, addUser, changeStatus } = require('../controllers/admin');
 const { userDelete, usersSelect, userSelect } = require('../controllers/user');
 const router = express.Router();
 const { authorization } = require('../middleware/authorizeJWTs');
@@ -14,6 +14,7 @@ router.post('/user/add', authorization, checkRole(role), addUser);
 router.delete('/user/delete', authorization, checkRole(role), userDelete);
 router.get('/users', authorization, checkRole(role), usersSelect);
 router.post('/user', authorization, checkRole(role), userSelect);
+router.patch('/user/status', authorization, checkRole(role), changeStatus);
 
 
 module.exports = router;
