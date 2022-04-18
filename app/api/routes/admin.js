@@ -5,9 +5,8 @@ const { checkRole } = require('../middleware/checkRole');
 
 const role = 'admin';
 
-router.get('/', authorization,(req, res)=>{
-    
-})
+router.get('/', authorization, checkRole(role));
+router.post('/manager/add', authorization, checkRole(role));
 
 
 module.exports = router;
