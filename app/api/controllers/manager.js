@@ -24,10 +24,33 @@ function addRestaurant(req, res){
 }
 
 
+function editRestaurant(req, res){
+
+    // res.send(`hello from the manager route...`);
+
+
+    const id = req.body.id;
+    const name = req.body.name;
+    const branch = req.body.branch;
+    const manager = req.body.manager;
+    const location = req.body.location;
+    const city = req.body.city;
+
+    Restaurant.findByIdAndUpdate({_id: id}, {$set: {name: name, branch: branch, manager: manager, location: location, city: city}}).then(editedUser =>{
+        res.send(editedUser);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+
+}
+
+
 
 
 module.exports = {
     
-    addRestaurant
+    addRestaurant,
+    editRestaurant
 
 }
