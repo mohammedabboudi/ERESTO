@@ -26,9 +26,6 @@ function addRestaurant(req, res){
 
 function editRestaurant(req, res){
 
-    // res.send(`hello from the manager route...`);
-
-
     const id = req.body.id;
     const name = req.body.name;
     const branch = req.body.branch;
@@ -46,11 +43,26 @@ function editRestaurant(req, res){
 }
 
 
+function deleteRestaurant(req, res){
+
+    const id = req.body.id;
+
+    Restaurant.findByIdAndDelete({_id: id}).then(deletedUser =>{
+        res.send(deletedUser);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+
+}
+
+
 
 
 module.exports = {
     
     addRestaurant,
-    editRestaurant
+    editRestaurant,
+    deleteRestaurant
 
 }
