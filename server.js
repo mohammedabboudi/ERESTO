@@ -4,6 +4,7 @@ const database = require('./app/config/database/Mongoose_connection')
 const bodyParser = require('body-parser');
 const userRouter = require('./app/api/routes/User');
 const adminRouter = require('./app/api/routes/admin');
+const managerRouter = require('./app/api/routes/manager');
 const cookieParser = require('cookie-parser')
 
 const port = process.env.PORT || 3000;
@@ -17,5 +18,6 @@ app.use(cookieParser());
 
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
+app.use('/manager', managerRouter);
 
 app.listen(port, ()=>{ console.log(`WE ARE CONNECTED TO THE SERVER SUCCESSFULY ON THE PORT : ${port}`) });
