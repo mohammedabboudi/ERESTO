@@ -2,7 +2,7 @@ const Restaurant = require("../models/Restaurant");
 
 
 
-function addMeal(req, res){
+function addRestaurant(req, res){
 
     // res.send(`hello from the manager route...`);
 
@@ -28,6 +28,6 @@ function addMeal(req, res){
 
 module.exports = {
     
-    addMeal
+    addRestaurant
 
 }
