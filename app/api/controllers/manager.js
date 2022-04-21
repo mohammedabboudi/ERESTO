@@ -1,4 +1,5 @@
 const Restaurant = require("../models/Restaurant");
+const Meal = require("../models/Meal");
 
 
 
@@ -28,12 +29,13 @@ function editRestaurant(req, res){
 
     const id = req.body.id;
     const name = req.body.name;
+    const description = req.body.description;
     const branch = req.body.branch;
     const manager = req.body.manager;
     const location = req.body.location;
     const city = req.body.city;
 
-    Restaurant.findByIdAndUpdate({_id: id}, {$set: {name: name, branch: branch, manager: manager, location: location, city: city}}).then(editedUser =>{
+    Restaurant.findByIdAndUpdate({_id: id}, {$set: {name: name, description: description, branch: branch, manager: manager, location: location, city: city}}).then(editedUser =>{
         res.send(editedUser);
     }).catch(err =>{
         res.send(err);
@@ -65,6 +67,6 @@ module.exports = {
     
     addRestaurant,
     editRestaurant,
-    deleteRestaurant
+    deleteRestaurant,
 
 }
