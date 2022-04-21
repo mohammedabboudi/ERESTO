@@ -110,6 +110,18 @@ function deleteMeal(req,res){
 
 
 
+function listRestaurants(req,res){
+
+    Restaurant.find().then(restaurants =>{
+        res.send(restaurants);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+}
+
+
+
 
 module.exports = {
     
@@ -118,6 +130,7 @@ module.exports = {
     deleteRestaurant,
     addMeal,
     editMeal,
-    deleteMeal
+    deleteMeal,
+    listRestaurants,
 
 }
