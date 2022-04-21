@@ -9,6 +9,12 @@ const MealSchema = new Schema({
         required: true
 
     },
+    description: {
+
+        type: String,
+        required: true
+
+    },
     price: {
 
         type: Number,
@@ -17,7 +23,13 @@ const MealSchema = new Schema({
     },
     image: {
 
-        type: Number,
+        type: String,
+        required: true
+
+    },
+    restaurant: {
+
+        type: String,
         required: true
 
     },

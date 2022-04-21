@@ -11,6 +11,12 @@ const RestaurantSchema = new Schema({
         required: true
 
     },
+    about:{
+
+        type: String,
+        required: true
+
+    },
     branch:{
 
         type: Number
