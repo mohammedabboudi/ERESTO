@@ -59,6 +59,27 @@ function deleteRestaurant(req, res){
 }
 
 
+function addMeal(req, res){
+
+    // res.send(`hello from the manager route...`);
+
+    newMeal = new Meal();
+
+    newMeal.name = req.body.name;
+    newMeal.description = req.body.description;
+    newMeal.price = req.body.price;
+    newMeal.image = req.body.image;
+    newMeal.restaurant = req.body.restaurant;
+    newMeal.category = req.body.category;
+
+    newMeal.save().then(savedMeal =>{
+        res.send(savedMeal);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+
+}
 
 
 
@@ -68,5 +89,6 @@ module.exports = {
     addRestaurant,
     editRestaurant,
     deleteRestaurant,
+    addMeal
 
 }
