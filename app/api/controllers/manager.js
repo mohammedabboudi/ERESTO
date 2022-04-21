@@ -20,7 +20,6 @@ function addRestaurant(req, res){
         res.send(err);
     })
 
-
 }
 
 
@@ -40,7 +39,6 @@ function editRestaurant(req, res){
         res.send(err);
     })
 
-
 }
 
 
@@ -53,7 +51,6 @@ function deleteRestaurant(req, res){
     }).catch(err =>{
         res.send(err);
     })
-
 
 }
 
@@ -76,7 +73,6 @@ function addMeal(req, res){
         res.send(err);
     })
 
-
 }
 
 
@@ -96,10 +92,21 @@ function editMeal(req, res){
         res.send(err);
     })
 
-   
-
 }
 
+
+
+function deleteMeal(req,res){
+
+    const id = req.body.id;
+
+    Meal.findByIdAndDelete({_id: id}).then(deletedMeal =>{
+        res.send(deletedMeal);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+}
 
 
 
@@ -110,6 +117,7 @@ module.exports = {
     editRestaurant,
     deleteRestaurant,
     addMeal,
-    editMeal
+    editMeal,
+    deleteMeal
 
 }
