@@ -122,6 +122,19 @@ function listRestaurants(req,res){
 
 
 
+function restaurant(req,res){
+
+    const id = req.body.id;
+
+    Restaurant.findOne({_id: id}).then(restaurant =>{
+        res.send(restaurant);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+}
+
+
 
 module.exports = {
     
@@ -132,5 +145,6 @@ module.exports = {
     editMeal,
     deleteMeal,
     listRestaurants,
+    restaurant
 
 }
