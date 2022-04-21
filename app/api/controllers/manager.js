@@ -5,7 +5,6 @@ const Meal = require("../models/Meal");
 
 function addRestaurant(req, res){
 
-    // res.send(`hello from the manager route...`);
 
     newRestaurant = new Restaurant();
 
@@ -61,7 +60,6 @@ function deleteRestaurant(req, res){
 
 function addMeal(req, res){
 
-    // res.send(`hello from the manager route...`);
 
     newMeal = new Meal();
 
@@ -82,6 +80,28 @@ function addMeal(req, res){
 }
 
 
+function editMeal(req, res){
+
+    const id = req.body.id;
+    const name = req.body.name;
+    const description = req.body.description;
+    const price = req.body.price;
+    const image = req.body.image;
+    const restaurant = req.body.restaurant;
+    const category = req.body.category;
+
+    Meal.findByIdAndUpdate({_id: id}, {$set: {name: name, description: description, price: price, image: image, restaurant: restaurant, category: category}}).then(editedMeal =>{
+        res.send(editedMeal);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+   
+
+}
+
+
+
 
 
 module.exports = {
@@ -89,6 +109,7 @@ module.exports = {
     addRestaurant,
     editRestaurant,
     deleteRestaurant,
-    addMeal
+    addMeal,
+    editMeal
 
 }
