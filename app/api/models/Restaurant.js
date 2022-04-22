@@ -14,7 +14,7 @@ const RestaurantSchema = new Schema({
     about:{
 
         type: String,
-        required: true
+        // required: true   
 
     },
     branch:{
@@ -22,12 +22,18 @@ const RestaurantSchema = new Schema({
         type: Number
 
     },
-    manager:{
+    owner: {
 
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: 'user'
 
     },
+    // meals: [{
+
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'meal'
+
+    // }],
     location:{
 
         type: String,
@@ -42,6 +48,12 @@ const RestaurantSchema = new Schema({
     }
 
 
+
+});
+RestaurantSchema.virtual("meals",{
+    ref: "meal",
+    localField: "_id",
+    foreignField: "restaurantId"
 })
 
 

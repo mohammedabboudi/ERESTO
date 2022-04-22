@@ -61,6 +61,14 @@ const userSchema = new Schema({
         default : null,
         
     },
+    restaurants: [
+
+        {
+        type: Schema.Types.ObjectId,
+        ref: 'restaurant'
+
+        }
+    ],
     blocked : {
 
         type : Boolean,
