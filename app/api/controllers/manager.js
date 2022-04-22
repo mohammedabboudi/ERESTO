@@ -66,6 +66,7 @@ function addMeal(req, res){
     newMeal.image = req.body.image;
     newMeal.restaurant = req.body.restaurant;
     newMeal.category = req.body.category;
+    newMeal.restaurantId=req.body.restaurantId;
 
     newMeal.save().then(savedMeal =>{
         res.send(savedMeal);
@@ -110,6 +111,19 @@ function deleteMeal(req,res){
 
 
 
+function listMeals(req, res){
+
+
+    Meal.find().then(meals =>{
+        res.send(meals);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+}
+
+
+
 function listRestaurants(req,res){
 
     Restaurant.find().then(restaurants =>{
@@ -145,6 +159,7 @@ module.exports = {
     editMeal,
     deleteMeal,
     listRestaurants,
-    restaurant
+    restaurant,
+    listMeals
 
 }
