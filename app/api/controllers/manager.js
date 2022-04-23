@@ -150,6 +150,21 @@ function restaurant(req,res){
 
 
 
+// function mealsByRestaurant(req, res){
+//     const { id } = req.body;
+//     const restaurant = Restaurant.findById(id).populate('meals');
+//      res.send(restaurant.meals);
+// }
+
+
+
+// function restaurantByMeal (req,res){
+//     const { id } = req.body;
+//     const restaurantByMeal = Post.findById(id).populate('restaurant');
+//     res.send(restaurantByMeal);
+// }
+
+
 module.exports = {
     
     addRestaurant,

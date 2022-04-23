@@ -28,12 +28,12 @@ const RestaurantSchema = new Schema({
         ref: 'user'
 
     },
-    // meals: [{
+    meals: [{
 
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'meal'
+        type: Schema.Types.ObjectId,
+        ref: 'meal'
 
-    // }],
+    }],
     location:{
 
         type: String,
@@ -50,11 +50,14 @@ const RestaurantSchema = new Schema({
 
 
 });
-RestaurantSchema.virtual("meals",{
-    ref: "meal",
-    localField: "_id",
-    foreignField: "restaurantId"
-})
+
+
+
+// RestaurantSchema.virtual("meals",{
+//     ref: "meal",
+//     localField: "_id",
+//     foreignField: "restaurantId"
+// })
 
 
 module.exports = mongoose.model( 'restaurant', RestaurantSchema );
