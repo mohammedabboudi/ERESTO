@@ -68,11 +68,22 @@ function addMeal(req, res){
     newMeal.category = req.body.category;
     newMeal.restaurantId=req.body.restaurantId;
 
-    newMeal.save().then(savedMeal =>{
-        res.send(savedMeal);
+    Restaurant.findOne({_id: req.body.restaurant}).then(restaurant =>{
+        restaurant.meals.push(newMeal);
+        restaurant.save().then(savedRestaurant =>{
+            newMeal.save().then(savedMeal =>{
+                res.send(savedMeal);
+            }).catch(err =>{
+                res.send(err);
+            })
+        }).catch(err =>{
+            res.send(err);
+        })
+
     }).catch(err =>{
         res.send(err);
     })
+
 
 }
 
