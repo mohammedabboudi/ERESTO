@@ -13,4 +13,4 @@ const sectorSchema = new Schema({
 })
 
 
-module.exports = mongoose.model('sector', sectorSchema);
+module.exports = mongoose.model('sectors', sectorSchema);

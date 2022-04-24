@@ -25,13 +25,13 @@ const RestaurantSchema = new Schema({
     owner: {
 
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'users'
 
     },
     meals: [{
 
         type: Schema.Types.ObjectId,
-        ref: 'meal'
+        ref: 'meals'
 
     }],
     location:{
@@ -60,4 +60,4 @@ const RestaurantSchema = new Schema({
 // })
 
 
-module.exports = mongoose.model( 'restaurant', RestaurantSchema );
+module.exports = mongoose.model( 'restaurants', RestaurantSchema );

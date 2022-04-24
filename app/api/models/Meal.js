@@ -30,7 +30,7 @@ const MealSchema = new Schema({
     restaurant: {
 
         type: Schema.Types.ObjectId,
-        ref: 'restaurant'
+        ref: 'restaurants'
 
     },
     category: {
@@ -43,4 +43,4 @@ const MealSchema = new Schema({
 })
 
 
-module.exports = mongoose.model('meal', MealSchema);
+module.exports = mongoose.model('meals', MealSchema);
