@@ -65,7 +65,7 @@ const userSchema = new Schema({
 
         {
         type: Schema.Types.ObjectId,
-        ref: 'restaurant'
+        ref: 'restaurants'
 
         }
     ],
@@ -81,4 +81,4 @@ const userSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('user', userSchema );
+module.exports = mongoose.model('users', userSchema );
