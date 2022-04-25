@@ -61,14 +61,12 @@ const userSchema = new Schema({
         default : null,
         
     },
-    restaurants: [
+    restaurants: [{
 
-        {
         type: Schema.Types.ObjectId,
         ref: 'restaurants'
 
-        }
-    ],
+    }],
     blocked : {
 
         type : Boolean,

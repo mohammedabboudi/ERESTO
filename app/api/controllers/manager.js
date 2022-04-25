@@ -1,5 +1,6 @@
 const Restaurant = require("../models/Restaurant");
 const Meal = require("../models/Meal");
+const User = require("../models/User");
 
 
 
@@ -13,12 +14,25 @@ function addRestaurant(req, res){
     newRestaurant.manager = req.body.manager;
     newRestaurant.location = req.body.location;
     newRestaurant.city = req.body.city;
+    newRestaurant.owner = req.user.id;
 
-    newRestaurant.save().then(savedRestaurant =>{
-        res.send(savedRestaurant);
-    }).catch(err =>{
-        res.send(err);
-    })
+
+    User.findOne({_id: req.user.id}).then(user =>{
+
+        user.restaurants.push(newRestaurant);
+        
+        user.save().then(savedUser =>{
+        newRestaurant.save().then(savedRestaurant =>{
+            res.send(savedRestaurant);
+        }).catch(err =>{
+            res.send(err);
+        })
+
+        }).catch(err =>{
+            res.send(err);
+        })
+
+    })    
 
 }
 
@@ -66,7 +80,6 @@ function addMeal(req, res){
     newMeal.image = req.body.image;
     newMeal.restaurant = req.body.restaurant;
     newMeal.category = req.body.category;
-    newMeal.restaurantId=req.body.restaurantId;
 
     Restaurant.findOne({_id: req.body.restaurant}).then(restaurant =>{
         restaurant.meals.push(newMeal);
