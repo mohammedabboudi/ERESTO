@@ -24,10 +24,7 @@ function addRestaurant(req, res){
         user.save().then(savedUser =>{
         newRestaurant.save().then(savedRestaurant =>{
             res.send(savedRestaurant);
-        }).catch(err =>{
-            res.send(err);
         })
-
         }).catch(err =>{
             res.send(err);
         })
@@ -86,11 +83,7 @@ function addMeal(req, res){
         restaurant.save().then(savedRestaurant =>{
             newMeal.save().then(savedMeal =>{
                 res.send(savedMeal);
-            }).catch(err =>{
-                res.send(err);
             })
-        }).catch(err =>{
-            res.send(err);
         })
 
     }).catch(err =>{
