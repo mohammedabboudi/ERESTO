@@ -69,8 +69,35 @@ function deleteRestaurant(req, res){
         }).catch(err =>{
             res.send(err);
         })  
-        
+
 }
+
+
+
+function listRestaurants(req,res){
+
+    Restaurant.find().populate('meals').then(restaurants =>{
+        res.send(restaurants);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+}
+
+
+
+function listrestaurant(req,res){
+
+    const id = req.body.id;
+
+    Restaurant.findOne({_id: id}).populate('meals').then(restaurant =>{
+        res.send(restaurant);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+}
+
 
 
 function addMeal(req, res){
@@ -154,29 +181,19 @@ function listMeals(req, res){
 
 
 
-function listRestaurants(req,res){
-
-    Restaurant.find().populate('meals').then(restaurants =>{
-        res.send(restaurants);
-    }).catch(err =>{
-        res.send(err);
-    })
-
-}
-
-
-
-function listrestaurant(req,res){
+function listMeal(req, res){
 
     const id = req.body.id;
 
-    Restaurant.findOne({_id: id}).populate('meals').then(restaurant =>{
-        res.send(restaurant);
+    Meal.findOne({_id: id}).then(meal =>{
+        res.send(meal);
     }).catch(err =>{
         res.send(err);
     })
 
 }
+
+
 
 
 
@@ -192,6 +209,7 @@ module.exports = {
     deleteMeal,
     listRestaurants,
     listrestaurant,
-    listMeals
+    listMeals,
+    listMeal
 
 }
