@@ -116,17 +116,23 @@ function editMeal(req, res){
 
 function deleteMeal(req,res){
 
-    const id = req.body.id;
+    const mealId = req.body.mealId;
+    const restaurantId = req.body.restaurantId;
 
-    Meal.findByIdAndDelete({_id: id}).then(deletedMeal =>{
-        res.send(deletedMeal);
-    }).catch(err =>{
-        res.send(err);
-    })
-
+    Restaurant.findById({_id: restaurantId}).then(restaurant =>{
+            let meals = restaurant.meals.filter( value =>{ return value.toString() !== mealId });
+            restaurant.meals = meals;
+                restaurant.save().then(restaurant =>{
+                    Meal.findByIdAndDelete({_id: mealId}).then(deletedMeal =>{
+                        res.send(`${deletedMeal} and ${restaurant} `)
+                    })
+                })
+        }).catch(err =>{
+            res.send(err);
+        })  
 }
 
-
+    
 
 function listMeals(req, res){
 
