@@ -1,5 +1,5 @@
 const express = require('express');
-const { addRestaurant, editRestaurant, deleteRestaurant, addMeal, editMeal, deleteMeal, listRestaurants, listrestaurant, listMeals } = require('../controllers/manager');
+const { addRestaurant, editRestaurant, deleteRestaurant, addMeal, editMeal, deleteMeal, listRestaurants, listrestaurant, listMeals, listMeal } = require('../controllers/manager');
 const { authorization } = require('../middleware/authorizeJWTs');
 const { checkRole } = require('../middleware/checkRole');
 const { mealValidator, mealValidation } = require('../validations/meal-validation');
@@ -17,6 +17,7 @@ router.post('/meal/add', authorization, checkRole(role), mealValidator, mealVali
 router.patch('/meal/edit', authorization, checkRole(role), mealValidator, mealValidation, editMeal);
 router.delete('/meal/delete', authorization, checkRole(role), deleteMeal);
 router.get('/meals', authorization, checkRole(role), listMeals);
+router.get('/meal', authorization, checkRole(role), listMeal);
 
 
 
