@@ -55,14 +55,21 @@ function editRestaurant(req, res){
 
 function deleteRestaurant(req, res){
 
-    const id = req.body.id;
+    const restaurantId = req.body.id;
+    const userId = req.user.id
 
-    Restaurant.findByIdAndDelete({_id: id}).then(deletedUser =>{
-        res.send(deletedUser);
-    }).catch(err =>{
-        res.send(err);
-    })
-
+    User.findById({_id: userId}).then(user =>{
+            let restaurants = user.restaurants.filter( value =>{ return value.toString() !== restaurantId });
+            user.restaurants = restaurants;
+                user.save().then(user =>{
+                    Restaurant.findByIdAndDelete({_id: restaurantId}).then(deletedRestaurant =>{
+                        res.send(`${deletedRestaurant} and ${user} `)
+                    })
+                })
+        }).catch(err =>{
+            res.send(err);
+        })  
+        
 }
 
 
@@ -132,7 +139,7 @@ function deleteMeal(req,res){
         })  
 }
 
-    
+
 
 function listMeals(req, res){
 
