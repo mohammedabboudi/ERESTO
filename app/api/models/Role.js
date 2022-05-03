@@ -8,10 +8,15 @@ const roleSchema = new Schema({
 
     name: {
         type: String,
-        reauired: true
+        reauired: true,
+        trim: true,
+        unique : true
+        
     },
     creatures: [{
-        type: String
+        type: String,
+        default: null,
+        trim: true
     }]
 
 })
