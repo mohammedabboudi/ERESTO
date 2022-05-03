@@ -2,6 +2,25 @@ const Sector = require("../models/Sector");
 const User = require("../models/User");
 
 
+
+function addRole(req, res){
+
+
+    newRole = new Role();
+
+    newRole.role = req.body.role;
+
+    newRole.save().then(savedRole =>{
+        res.send(savedRole);
+    }).catch(err =>{
+        res.send(err);
+    })
+
+}
+
+
+
+
 function addSector(req, res){
 
 
@@ -75,6 +94,7 @@ function changeStatus(req, res){
 
 module.exports = {
 
+    addRole,
     addSector,
     addUser,
     changeStatus
