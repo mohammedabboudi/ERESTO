@@ -1,10 +1,10 @@
+const Role = require("../models/Role");
 const Sector = require("../models/Sector");
 const User = require("../models/User");
 
 
 
 function addRole(req, res){
-
 
     newRole = new Role();
 
@@ -20,11 +20,7 @@ function addRole(req, res){
 
 
 
-
 function addSector(req, res){
-
-
-    // res.send(req.body.sector)
 
     newSector = new Sector();
 
