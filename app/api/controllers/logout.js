@@ -1,6 +1,6 @@
 
 
-function logout (req, res){
+function logout (req, res, next){
 
     res.cookie("access_token", '', {
         secure: false,
@@ -12,7 +12,7 @@ function logout (req, res){
         httpOnly: true,
     })
 
-    res.send(`OK`)
+    next();
     
 }
 

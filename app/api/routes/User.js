@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { userSelect, userRegister, userEdit, userDelete } = require('../controllers/user');
+const { userSelect, userRegister, editAccount, deleteAccount } = require('../controllers/user');
 const { logout } = require("../controllers/logout");
 const { authorization } = require('../middleware/authorizeJWTs');
 const { saveValidator, saveValidation } = require('../validations/user/register-validation');
@@ -16,18 +16,13 @@ router.get('/', authorization);
 
 router.post('/register', saveValidator, saveValidation, userRegister, signTokens);
 
-router.patch('/edit', authorization, saveValidator, saveValidation, userEdit);
+router.patch('/edit', authorization, saveValidator, saveValidation, editAccount);
 
-router.delete('/delete', authorization, userDelete);
+router.delete('/delete', authorization, deleteAccount, logout,  (req, res)=>{ res.send(`YOU'RE ACCOUNT HAS BEEN DELETED SUCCESSFULY...`); });
 
 router.post('/login', loginValidator, loginValidation, login, signTokens);
 
-router.delete('/logout', logout);
-
-router.get('/test', authorization,(req, res)=>{
-
-    res.send(`hello from the server side ...`); 
-});
+router.delete('/logout', logout, (req, res)=>{ res.send(`OK YOU'RE NOW LOGED OUT`); });
 
 
 module.exports = router;
