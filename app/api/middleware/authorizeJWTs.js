@@ -25,7 +25,7 @@ function authorization(req, res, next){
     const access_token = req.cookies.access_token || '';
     const refresh_token = req.cookies.refresh_token || '';
 
-    if (!refresh_token && !access_token) res.send(`you're logged out`);
+    if (!refresh_token && !access_token) res.send(`you're not logged in`);
 
       try {
         if (access_token) {

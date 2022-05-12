@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
 
 const roleSchema = new Schema({
 
-    name: {
+    role: {
         type: String,
         reauired: true,
-        trim: true,
-        unique : true
+        unique : true,
+        trim: true
         
     },
     creatures: [{

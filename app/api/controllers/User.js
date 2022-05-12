@@ -60,12 +60,14 @@ function userRegister(req, res, next){
 
         }    
 
+        console.log('there is an error')
+
     })
 
 }
 
 
-function userEdit(req, res){
+function editAccount(req, res){
 
 
     const id = req.body.id;
@@ -97,11 +99,11 @@ function userEdit(req, res){
 }
 
 
-function userDelete(req, res){
+function deleteAccount(req, res, next){
     
-    User.findOneAndDelete({ _id: req.body.id}).then(deletedUser =>{
-        res.send(deletedUser);
-        console.log(`THE USER DELETED SUCCESSFULY...`)
+User.findOneAndDelete({ _id: req.user.id }).then(deletedUser =>{
+        // res.send(deletedUser); 
+        next();
     }).catch(err =>{
         res.send(err);
     });
@@ -114,7 +116,6 @@ module.exports = {
     usersSelect,
     userSelect,
     userRegister,
-    userEdit,
-    userDelete
-
+    editAccount,
+    deleteAccount
 }

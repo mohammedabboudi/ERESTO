@@ -10,8 +10,17 @@ function login(req, res, next){
 
     User.findOne(userCredentials).then(user =>{
 
-        req.user = user;
-        next();
+        if (user != null) {
+
+            req.user = user;
+            next();
+
+        } else {
+            
+           res.send(`there is no user with this credencials. try again or register`)
+
+        }
+       
 
     }).catch(err =>{
 
