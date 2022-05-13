@@ -9,7 +9,7 @@ const { restaurantValidator, restaurantValidation } = require('../validations/re
 
 
 const role = 'owner';
-const createdUsers = ['manager'];
+const createdRoles = ['manager'];
 
 
 router.get('/restaurants', authorization, checkRole(role), listRestaurants);
