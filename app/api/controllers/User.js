@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 
-function usersSelect(req, res){
+function listUsers(req, res){
 
     User.find({}).then(users =>{
 
@@ -15,7 +15,7 @@ function usersSelect(req, res){
 
 }
 
-function userSelect(req, res){
+function userSelection(req, res){
 
     const id = req.body.id
 
@@ -32,7 +32,7 @@ function userSelect(req, res){
 }
 
 
-function userRegister(req, res, next){
+function createAccount(req, res, next){
 
     const newUser = new User();
 
@@ -113,9 +113,9 @@ User.findOneAndDelete({ _id: req.user.id }).then(deletedUser =>{
 
 module.exports = {
 
-    usersSelect,
-    userSelect,
-    userRegister,
+    listUsers,
+    userSelection,
+    createAccount,
     editAccount,
     deleteAccount
 }
