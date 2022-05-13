@@ -85,7 +85,7 @@ function listRestaurants(req,res){
 
 
 
-function listrestaurant(req,res){
+function restaurantSelection(req,res){
 
     const id = req.body.id;
 
@@ -106,7 +106,7 @@ module.exports = {
     editRestaurant,
     deleteRestaurant,
     listRestaurants,
-    listrestaurant,
+    restaurantSelection,
     
 
 }

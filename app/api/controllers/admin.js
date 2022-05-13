@@ -4,35 +4,6 @@ const User = require("../models/User");
 
 
 
-function addRole(req, res){
-
-    newRole = new Role();
-
-    newRole.role = req.body.role;
-
-    newRole.save().then(savedRole =>{
-        res.send(savedRole);
-    }).catch(err =>{
-        if(err.keyPattern.role == 1){
-            res.send(`${err.keyValue.role} is already exist`);
-        }
-    })
-
-}
-
-function addCreature(){
-
-    const role_id = req.role_id;
-
-    Role.findByIdAndUpdate({id: role_id}, {$set: {creatures: creatures}}).then(updatedRole =>{
-        res.send(updatedRole);
-    }).catch(err =>{
-        res.send(err);
-    })
-
-}
-
-
 function addSector(req, res){
 
     newSector = new Sector();
@@ -103,7 +74,6 @@ function changeStatus(req, res){
 
 module.exports = {
 
-    addRole,
     addSector,
     addUser,
     changeStatus
