@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { addMeal, editMeal, deleteMeal, listMeals, listMeal } = require('../controllers/manager');
+const { addMeal, editMeal, deleteMeal, listMeals, listMeal } = require('../controllers/head');
 const { authorization } = require('../middleware/authorizeJWTs');
 const { checkRole } = require('../middleware/checkRole');
 const { mealValidator, mealValidation } = require('../validations/meal-validation');
 
-const role = 'manager';
+const role = 'head';
 
 
 router.post('/meal/add', authorization, checkRole(role), mealValidator, mealValidation, addMeal);

@@ -57,8 +57,9 @@ const userSchema = new Schema({
     },
     sector : {
 
-        type : String,
-        default : null,
+        type : Schema.Types.ObjectId,
+        ref: 'sectors',
+        default : null
         
     },
     restaurants: [{
