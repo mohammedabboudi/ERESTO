@@ -1,14 +1,13 @@
 const express = require('express');
 const { addUser } = require('../controllers/admin');
 const router = express.Router();
-const { addMeal, editMeal, deleteMeal, listMeals, listMeal } = require('../controllers/head');
 const { deleteAccount, listUsers, userSelection } = require('../controllers/user');
 const { authorization } = require('../middleware/authorizeJWTs');
 const { checkRole } = require('../middleware/checkRole');
-const { mealValidator, mealValidation } = require('../validations/meal-validation');
+
 
 const role = 'head';
-const createdUsers = ['delivery man'];
+const createdRoles = ['delivery man'];
 
 
 router.post('/user/add', authorization, checkRole(role), addUser);
