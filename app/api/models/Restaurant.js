@@ -49,7 +49,9 @@ const RestaurantSchema = new Schema({
     approved:{
 
         type: String,
-        default: false
+        default: false,
+        required:true
+
     }
 
 
