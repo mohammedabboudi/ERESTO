@@ -1,7 +1,10 @@
+const { send } = require('express/lib/response');
 const User = require('../models/User');
 
 
-function listUsers(req, res){
+
+
+function listMembers(req, res){
 
     User.find({}).then(users =>{
 
@@ -17,7 +20,7 @@ function listUsers(req, res){
 
 
 
-function listUser(req, res){
+function listMember(req, res){
 
     const id = req.body.id
 
@@ -34,21 +37,20 @@ function listUser(req, res){
 }
 
 
-function createAccount(req, res, next){
+
+function addMember(req, res){
 
     const newUser = new User();
 
     newUser.email = req.body.email;
     newUser.password = req.body.password;
-    // newUser.role = req.body.role; // should not be here
+    newUser.role = req.body.role;
     newUser.phoneNumber = req.body.phoneNumber;
     newUser.address = req.body.address;
+    newUser.sector = req.body.sector;
 
-    newUser.save().then(savedUser =>{
-
-         req.user = savedUser;
-         next();
-
+    newUser.save().then(userSaved=>{
+        res.send(userSaved);
     }).catch(err =>{
 
         if (err.keyPattern.email) {
@@ -62,25 +64,26 @@ function createAccount(req, res, next){
 
         }    
 
-        console.log('there is an error')
-
     })
 
 }
 
+    
 
-function editAccount(req, res){
+
+function editMember(req, res){
 
 
     const id = req.body.id;
     const email = req.body.email;
     const password = req.body.password;
+    const role = req.body.role;
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
 
-    User.findOneAndUpdate({_id : id}, {$set: {email: email, password: password, phoneNumber: phoneNumber, address: address}}).then(updatedUser =>{
+    User.findOneAndUpdate({_id : id}, {$set: {email: email, password: password, role: role, phoneNumber: phoneNumber, address: address}}).then(updatedMember =>{
 
-        res.send(updatedUser);
+        res.send(updatedMember);
 
     }).catch(err =>{
 
@@ -100,44 +103,47 @@ function editAccount(req, res){
 }
 
 
-function deleteAccount(req, res, next){
+
+function deleteMember(req, res, next){
     
-User.findOneAndDelete({ _id: req.user.id }).then(deletedUser =>{
-        // res.send(deletedUser); 
-        next();
-    }).catch(err =>{
-        res.send(err);
-    });
+    User.findOneAndDelete({ _id: req.body.id }).then(deletedMember =>{
+            // res.send(deletedUser); 
+            next();
+        }).catch(err =>{
+            res.send(err);
+        });
 }
 
 
 
+function listMember(members){
 
-function changeStatus(req, res){
+    return (req, res)=>{
 
-    const id = req.body.id;
-    const blocked = req.body.blocked;
+        res.send('hello ...')
 
-    User.findByIdAndUpdate({_id: id}, {$set: {blocked : blocked}}).then(user =>{
-
-        res.send(user);
-    }).catch(err =>{
-
-        res.send(err);
-    })
+    }
 
 }
 
 
+function listMembers(members){
+
+    return (req, res)=>{
+
+        res.send('hello ...')
+
+    }
+
+}
 
 
 module.exports = {
 
-    listUsers,
-    listUser,
-    createAccount,
-    editAccount,
-    deleteAccount,
-    changeStatus
+    addMember,
+    deleteMember,
+    editMember,
+    listMember,
+    listMembers
 
 }

@@ -12,7 +12,7 @@ const { login } = require('../controllers/login');
 
 router.post('/register', saveValidator, saveValidation, createAccount, signTokens);
 router.patch('/edit', authorization, saveValidator, saveValidation, editAccount);
-router.delete('/delete', authorization, deleteAccount, logout,  (req, res)=>{ res.send(`YOU'RE ACCOUNT HAS BEEN DELETED SUCCESSFULY...`); });
+router.delete('/delete', authorization, deleteAccount, logout, (req, res)=>{ res.send(`YOU'RE ACCOUNT HAS BEEN DELETED SUCCESSFULY...`); });
 router.post('/login', loginValidator, loginValidation, login, signTokens);
 router.delete('/logout', logout, (req, res)=>{ res.send(`OK YOU'RE NOW LOGED OUT`); });
 
