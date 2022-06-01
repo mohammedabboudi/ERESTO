@@ -1,15 +1,16 @@
 const express = require('express');
-const { addUser } = require('../controllers/admin');
 const router = express.Router();
 const { addRestaurant, editRestaurant, deleteRestaurant, listRestaurants, restaurantSelection } = require('../controllers/owner');
-const { deleteAccount, listUsers, userSelection } = require('../controllers/user');
 const { authorization } = require('../middleware/authorizeJWTs');
 const { checkRole } = require('../middleware/checkRole');
+const { addMember, deleteMember, listMember, listMembers, editMember } = require('../controllers/member');
 const { restaurantValidator, restaurantValidation } = require('../validations/restaurant-validation');
+const { checkMembers } = require('../middleware/checkMembers');
+const { changeStatus } = require('../controllers/user');
 
 
 const role = 'owner';
-const createdRoles = ['manager'];
+const members = ['manager'];
 
 
 router.get('/restaurants', authorization, checkRole(role), listRestaurants);
@@ -18,10 +19,16 @@ router.post('/restaurant/add', authorization, checkRole(role), restaurantValidat
 router.patch('/restaurant/edit', authorization, checkRole(role), restaurantValidator, restaurantValidation, editRestaurant);
 router.delete('/restaurant/delete', authorization, checkRole(role), deleteRestaurant);
 
-router.post('/user/add', authorization, checkRole(role), addUser);
-router.delete('/user/delete', authorization, checkRole(role), deleteAccount);
-router.get('/users', authorization, checkRole(role), listUsers);
-router.post('/user', authorization, checkRole(role), userSelection);
+
+router.post('/member/add', authorization, checkRole(role), checkMembers(members), addMember);
+router.delete('/member/delete', authorization, checkRole(role), checkMembers(members), deleteMember, (req, res)=>{ res.send(`THE MEMBER IS DELETED SUCCESSFULY...`); });
+router.put('/member/edit', authorization, checkRole(role), checkMembers(members), editMember);
+router.get('/members', authorization, checkRole(role), checkMembers(members), listMembers);
+router.post('/member', authorization, checkRole(role), checkMembers(members), listMember);
+router.patch('/user/status', authorization, checkRole(role), checkMembers(members), changeStatus);
+
+
+
 
 
 

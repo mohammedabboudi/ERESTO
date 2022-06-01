@@ -6,6 +6,7 @@ const userRouter = require('./app/api/routes/user');
 const adminRouter = require('./app/api/routes/admin');
 const headRouter = require('./app/api/routes/head');
 const ownerRouter = require('./app/api/routes/owner');
+const managerRouter = require('./app/api/routes/manager');
 const cookieParser = require('cookie-parser')
 
 const port = process.env.PORT || 3000;
@@ -21,5 +22,6 @@ app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 app.use('/head', headRouter);
 app.use('/owner', ownerRouter);
+app.use('/manager', managerRouter)
 
 app.listen(port, ()=>{ console.log(`WE ARE CONNECTED TO THE SERVER SUCCESSFULY ON THE PORT : ${port}`) });
