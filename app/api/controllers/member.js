@@ -47,7 +47,6 @@ function addMember(req, res){
     newUser.role = req.body.role;
     newUser.phoneNumber = req.body.phoneNumber;
     newUser.address = req.body.address;
-    newUser.sector = req.body.sector;
 
     newUser.save().then(userSaved=>{
         res.send(userSaved);
