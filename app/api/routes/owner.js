@@ -5,7 +5,7 @@ const { authorization } = require('../middleware/authorizeJWTs');
 const { checkRole } = require('../middleware/checkRole');
 const { addMember, deleteMember, listMember, listMembers, editMember } = require('../controllers/member');
 const { restaurantValidator, restaurantValidation } = require('../validations/restaurant-validation');
-const { checkMembers } = require('../middleware/checkMembers');
+const { checkAddedMember } = require('../middleware/checkAddedMember');
 const { changeStatus } = require('../controllers/user');
 
 
@@ -20,12 +20,6 @@ router.patch('/restaurant/edit', authorization, checkRole(role), restaurantValid
 router.delete('/restaurant/delete', authorization, checkRole(role), deleteRestaurant);
 
 
-router.post('/member/add', authorization, checkRole(role), checkMembers(role, members), addMember);
-router.delete('/member/delete', authorization, checkRole(role), deleteMember, (req, res)=>{ res.send(`THE MEMBER IS DELETED SUCCESSFULY...`); });
-router.put('/member/edit', authorization, checkRole(role), checkMembers(role, members), editMember);
-router.get('/members', authorization, checkRole(role), checkMembers(role, members), listMembers);
-router.post('/member', authorization, checkRole(role), checkMembers(role, members), listMember);
-router.patch('/user/status', authorization, checkRole(role), checkMembers(role, members), changeStatus);
 
 
 

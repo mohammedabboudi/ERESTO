@@ -1,4 +1,4 @@
-function checkMembers(role, members){
+function checkAddedMember(members){
 
     return (req, res, next)=>{
 
@@ -13,5 +13,5 @@ function checkMembers(role, members){
 
 module.exports = {
 
-    checkMembers
+    checkAddedMember
 }
