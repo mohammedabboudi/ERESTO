@@ -4,35 +4,44 @@ const User = require('../models/User');
 
 
 
-function listMembers(req, res){
+function listMembers(members){
 
-    User.find({}).then(users =>{
+    return (req, res)=>{
 
-        res.send(users);
+        if (req.body.member == '') {
+            
+            User.find({role: members}).then(members =>{
+            res.send(members);
 
-    }).catch(err =>{
+            }).catch(err =>{
+                res,send(err);
+            })
 
-        res.send(err);
+        } else if(req.body.member != '' && members.includes(req.body.member)){
 
-    });
+            User.find({role: req.body.member}).then(members =>{
+            res.send(members);
 
+            }).catch(err =>{
+                res,send(err);
+            })
+            
+        }else{
+
+            let error = {error:'YOU HAVE THE RIGHT TO ACCESS OR HANDLE JUST THE',members: members};
+            res.send(error);
+        }
+
+    }
+    
 }
+
 
 
 
 function listMember(req, res){
 
-    const id = req.body.id
-
-    User.find({_id: id}).then(user =>{
-
-        res.send(user);
-
-    }).catch(err =>{
-
-        res.send(err);
-
-    });
+   
 
 }
 
@@ -114,27 +123,6 @@ function deleteMember(req, res, next){
 }
 
 
-
-function listMember(members){
-
-    return (req, res)=>{
-
-        res.send('hello ...')
-
-    }
-
-}
-
-
-function listMembers(members){
-
-    return (req, res)=>{
-
-        res.send('hello ...')
-
-    }
-
-}
 
 
 module.exports = {
