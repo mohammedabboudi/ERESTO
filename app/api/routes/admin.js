@@ -18,7 +18,7 @@ router.post('/member/add', authorization, checkRole(role), checkAddedMember(memb
 router.delete('/member/delete', authorization, checkRole(role), deleteMember, (req, res)=>{ res.send(`THE MEMBER IS DELETED SUCCESSFULY...`); });
 router.put('/member/edit', authorization, checkRole(role), checkAddedMember(members), editMember);
 router.post('/members', authorization, checkRole(role), listMembers(members));
-router.post('/member', authorization, checkRole(role), (req, res)=>{ console.log('hellobbbbbb') });
+router.post('/member', authorization, checkRole(role), listMember(members));
 router.patch('/user/status', authorization, checkRole(role), checkAddedMember(members), changeStatus);
 
 

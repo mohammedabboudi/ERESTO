@@ -28,7 +28,7 @@ function listMembers(members){
             
         }else{
 
-            let error = {error:'YOU HAVE THE RIGHT TO ACCESS OR HANDLE JUST THE',members: members};
+            const error = {error:'YOU HAVE THE RIGHT TO ACCESS OR HANDLE JUST THE',members: members};
             res.send(error);
         }
 
@@ -39,9 +39,35 @@ function listMembers(members){
 
 
 
-function listMember(req, res){
+function listMember(members){
 
-   
+   return (req,res)=>{
+
+    const id = req.body.id
+
+        if (id != '' && null) {
+            
+            res.send(`YOU SHOULD SET THE USER !`);
+
+        } else {
+
+            User.find({_id: id}).then(member => {
+
+                if (members.includes(member[0].role)) {
+                    res.send(member);    
+                }else{
+                    res.send(`YOU CANNOT ACCESS THIS INFOS`);   
+                }
+
+            }).catch(err =>{
+
+                res.send('THERE IS NO MEMBER HAS THIS ID');
+
+            })
+            
+        }
+
+   }
 
 }
 
