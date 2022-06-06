@@ -61,7 +61,7 @@ function listMember(members){
 
             }).catch(err =>{
 
-                res.send('THERE IS NO MEMBER HAS THIS ID');
+                res.send('THIS MEMBER IS NOT EXIST');
 
             })
             
@@ -115,7 +115,7 @@ function editMember(req, res){
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
 
-    User.findOneAndUpdate({_id : id}, {$set: {email: email, password: password, role: role, phoneNumber: phoneNumber, address: address}}).then(updatedMember =>{
+    User.findOneAndUpdate({_id : id}, {$set: {email: email, password: password, role: role, phoneNumber: phoneNumber, address: address}}, {new: true}).then(updatedMember =>{
 
         res.send(updatedMember);
 
@@ -140,7 +140,7 @@ function editMember(req, res){
 
 function deleteMember(req, res, next){
     
-    User.findOneAndDelete({ _id: req.body.id }).then(deletedMember =>{
+    User.findOneAndDelete({ _id: req.body.id }, {new: true}).then(deletedMember =>{
             // res.send(deletedUser); 
             next();
         }).catch(err =>{

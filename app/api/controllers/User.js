@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 function listUsers(req, res){
 
-    User.find({}).then(users =>{
+    User.find({role: 'client'}).then(users =>{
 
         res.send(users);
 
@@ -78,7 +78,7 @@ function editAccount(req, res){
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
 
-    User.findOneAndUpdate({_id : id}, {$set: {email: email, password: password, phoneNumber: phoneNumber, address: address}}).then(updatedUser =>{
+    User.findOneAndUpdate({_id : id}, {$set: {email: email, password: password, phoneNumber: phoneNumber, address: address}}, {new: true}).then(updatedUser =>{
 
         res.send(updatedUser);
 
@@ -102,7 +102,7 @@ function editAccount(req, res){
 
 function deleteAccount(req, res, next){
     
-User.findOneAndDelete({ _id: req.user.id }).then(deletedUser =>{
+User.findOneAndDelete({ _id: req.user.id }, {new: true}).then(deletedUser =>{
         // res.send(deletedUser); 
         next();
     }).catch(err =>{
@@ -118,11 +118,9 @@ function changeStatus(req, res){
     const id = req.body.id;
     const blocked = req.body.blocked;
 
-    User.findByIdAndUpdate({_id: id}, {$set: {blocked : blocked}}).then(user =>{
-
+    User.findByIdAndUpdate({_id: id}, {$set: {blocked : blocked}}, {new: true}).then(user =>{
         res.send(user);
     }).catch(err =>{
-
         res.send(err);
     })
 

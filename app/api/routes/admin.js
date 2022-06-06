@@ -1,7 +1,7 @@
 const express = require('express');
 const { addSector } = require('../controllers/admin');
 const { addMember, deleteMember, editMember, listMembers, listMember } = require('../controllers/member');
-const { changeStatus } = require('../controllers/user');
+const { changeStatus, listUsers, listUser } = require('../controllers/user');
 const router = express.Router();
 const { authorization } = require('../middleware/authorizeJWTs');
 const { checkAddedMember } = require('../middleware/checkAddedMember');
@@ -19,7 +19,11 @@ router.delete('/member/delete', authorization, checkRole(role), deleteMember, (r
 router.put('/member/edit', authorization, checkRole(role), checkAddedMember(members), editMember);
 router.post('/members', authorization, checkRole(role), listMembers(members));
 router.post('/member', authorization, checkRole(role), listMember(members));
-router.patch('/user/status', authorization, checkRole(role), checkAddedMember(members), changeStatus);
+
+
+router.get('/users', authorization, checkRole(role), listUsers);
+router.post('/user', authorization, checkRole(role), listUser);
+router.patch('/user/status', authorization, checkRole(role), changeStatus);
 
 
 
