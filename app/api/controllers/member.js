@@ -8,10 +8,14 @@ function listMembers(members){
 
     return (req, res)=>{
 
-        if (req.body.member == '') {
+        if (req.body.member == '' || typeof req.body.member === 'undefined') {
             
             User.find({role: members}).then(members =>{
-            res.send(members);
+            if (members != '') {
+                res.send(members);
+            } else {
+                res.send(`NO MEMBER FOUND !`);
+            }
 
             }).catch(err =>{
                 res,send(err);
@@ -20,7 +24,11 @@ function listMembers(members){
         } else if(req.body.member != '' && members.includes(req.body.member)){
 
             User.find({role: req.body.member}).then(members =>{
-            res.send(members);
+                if (members != '') {
+                    res.send(members);
+                } else {
+                    res.send(`NO MEMBER FOUND !`);
+                }
 
             }).catch(err =>{
                 res,send(err);
@@ -96,7 +104,7 @@ function addMember(req, res){
 
             res.send(`Please try another phone number, this one : ${err.keyValue.phoneNumber} is already exist`);
 
-        }    
+        }   
 
     })
 
