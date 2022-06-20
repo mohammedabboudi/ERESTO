@@ -14,10 +14,10 @@ const RestaurantSchema = new Schema({
     about:{
 
         type: String,
-        // required: true   
+        required: true
 
     },
-    branch:{
+    section:{
 
         type: Number
 

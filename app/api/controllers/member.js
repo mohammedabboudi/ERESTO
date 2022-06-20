@@ -53,7 +53,7 @@ function listMember(members){
 
     const id = req.body.id
 
-        if (id != '' && null) {
+        if (id == '' && null) {
             
             res.send(`YOU SHOULD SET THE USER !`);
 
@@ -148,12 +148,28 @@ function editMember(req, res){
 
 function deleteMember(req, res, next){
     
-    User.findOneAndDelete({ _id: req.body.id }, {new: true}).then(deletedMember =>{
-            // res.send(deletedUser); 
-            next();
+   User.find({_id: req.body.id}).then(user =>{
+
+    if (user != '' || null) {
+
+        User.findOneAndDelete({ _id: req.body.id }).then(deletedMember =>{
+            if (deletedMember != '' && !null) {
+                next();
+            } else {
+                res.send(`NO MEMBER FOUND !`);
+            } 
+            
         }).catch(err =>{
             res.send(err);
         });
+        
+    } else {
+
+        res.send(`THE USER IS AL READY DELETED !`);
+        
+    }
+
+   })
 }
 
 

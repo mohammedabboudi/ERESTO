@@ -9,44 +9,85 @@ function addRestaurant(req, res){
     newRestaurant = new Restaurant();
 
     newRestaurant.name = req.body.name;
-    newRestaurant.branch = req.body.branch;
-    newRestaurant.manager = req.body.manager;
+    newRestaurant.about = req.body.about;
+    newRestaurant.section = req.body.section;
     newRestaurant.location = req.body.location;
     newRestaurant.city = req.body.city;
     newRestaurant.owner = req.user.id;
 
+    Restaurant.findOne({name: req.body.name, section: req.body.section}).then(restaurant =>{
 
-    User.findOne({_id: req.user.id}).then(user =>{
+                if (restaurant) {
 
-        user.restaurants.push(newRestaurant);
+                    if (restaurant.name == req.body.name && restaurant.section == req.body.section) {
+
+                        res.send(`THIS RESTAURANT AND ITS BRANCH ARE ALREADY EXIST ! YOU CAN ADD A NEW BRANCH`);
+                    
+                    } else {
+
+                        User.findOne({_id: req.user.id}).then(user =>{
         
-        user.save().then(savedUser =>{
-        newRestaurant.save().then(savedRestaurant =>{
-            res.send(savedRestaurant);
-        })
-        }).catch(err =>{
-            res.send(err);
-        })
+                            user.restaurants.push(newRestaurant);
+                            
+                            user.save().then(savedUser =>{
+                            newRestaurant.save().then(savedRestaurant =>{
+                                res.send(savedRestaurant);
+                            })
+                            }).catch(err =>{
+                                res.send(err);
+                            })
+                    
+                        })   
 
-    })    
+                    }   
+                
+                        
+                }else{
+
+                        User.findOne({_id: req.user.id}).then(user =>{
+        
+                        user.restaurants.push(newRestaurant);
+                        
+                        user.save().then(savedUser =>{
+                        newRestaurant.save().then(savedRestaurant =>{
+                            res.send(savedRestaurant);
+                        })
+                        }).catch(err =>{
+                            res.send(err);
+                        })
+                
+                    })   
+
+                }
+    })
 
 }
+
 
 
 function editRestaurant(req, res){
 
     const id = req.body.id;
-    const name = req.body.name;
-    const description = req.body.description;
-    const branch = req.body.branch;
-    const manager = req.body.manager;
+    const about = req.body.about;
     const location = req.body.location;
     const city = req.body.city;
 
-    Restaurant.findByIdAndUpdate({_id: id}, {$set: {name: name, description: description, branch: branch, manager: manager, location: location, city: city}}).then(editedUser =>{
-        res.send(editedUser);
-    }).catch(err =>{
-        res.send(err);
+    Restaurant.findOne({_id: id}).then(restaurant =>{
+
+        if (restaurant) {
+
+            Restaurant.findByIdAndUpdate({_id: id}, {$set: {about: about, location: location, city: city}}).then(editedUser =>{
+                res.send(editedUser);
+            }).catch(err =>{
+                res.send(err);
+            })
+
+        } else {
+
+            res.send(`NO RESTAURANT FOUND !`);
+
+        }  
+    
     })
 
 }
@@ -76,7 +117,11 @@ function deleteRestaurant(req, res){
 function listRestaurants(req,res){
 
     Restaurant.find().populate('meals').then(restaurants =>{
-        res.send(restaurants);
+        if (restaurants != '' || null) {
+            res.send(restaurants);
+        } else {
+            res.send(`NO RESTAURANT FOUND !`);
+        }
     }).catch(err =>{
         res.send(err);
     })
@@ -85,7 +130,7 @@ function listRestaurants(req,res){
 
 
 
-function restaurantSelection(req,res){
+function listRestaurant(req,res){
 
     const id = req.body.id;
 
@@ -106,7 +151,7 @@ module.exports = {
     editRestaurant,
     deleteRestaurant,
     listRestaurants,
-    restaurantSelection,
+    listRestaurant
     
 
 }
