@@ -140,7 +140,12 @@ function listRestaurant(req,res){
     const id = req.body.id;
 
     Restaurant.findOne({_id: id}).populate('meals').then(restaurant =>{
-        res.send(restaurant);
+        if (restaurant) {
+            res.send(restaurant);
+        } else {
+            res.send(`NO RESTAURANT FOUND !`);
+        }
+        
     }).catch(err =>{
         res.send(err);
     })
