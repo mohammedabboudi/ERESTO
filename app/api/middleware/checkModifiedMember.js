@@ -1,4 +1,4 @@
-function checkAddedMember(members){
+function checkModifiedMember(members){
 
     return (req, res, next)=>{
 
@@ -7,7 +7,7 @@ function checkAddedMember(members){
         }else if(members.includes(req.body.role)){
             next();
         }else{
-            res.send(`you're not allowed to create ${req.body.role} because your role is ${req.user.role}...`);
+            res.send(`you're not allowed to modify ${req.body.role} because your role is ${req.user.role}...`);
         }
     }
 }
@@ -15,5 +15,5 @@ function checkAddedMember(members){
 
 module.exports = {
 
-    checkAddedMember
+    checkModifiedMember
 }
