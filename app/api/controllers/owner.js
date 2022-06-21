@@ -103,7 +103,12 @@ function deleteRestaurant(req, res){
             user.restaurants = restaurants;
                 user.save().then(user =>{
                     Restaurant.findByIdAndDelete({_id: restaurantId}).then(deletedRestaurant =>{
-                        res.send(`${deletedRestaurant} and ${user} `)
+                        if (deletedRestaurant) {
+                            res.send(`${deletedRestaurant.name} and ${user.email} `);
+                        }else{
+                            res.send(`NO RESTAURANT FOUND !`);   
+                        }
+                        
                     })
                 })
         }).catch(err =>{
